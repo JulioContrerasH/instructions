@@ -1,0 +1,72 @@
+import os
+import re
+import shutil
+from bs4 import BeautifulSoup
+
+# Rutas
+html_file_path = '/home/contrerasnetk/Documents/Repositories/IPL-UV.github.io/static/old_pages/people/excathedra.html'
+source_folder = '/home/contrerasnetk/Downloads/ahorapgae/isp.uv.es'
+destination_folder = '/home/contrerasnetk/Documents/Repositories/fresh_clone/people/excathedra'
+
+# Create forlder destination_folder if not exists
+if not os.path.exists(destination_folder):
+    os.makedirs(destination_folder)
+
+# Tipos de archivo a buscar
+file_patterns = [r'\.zip$', r'\.tar\.gz$', r'\.tar$', r'\.rar$', r'\.mkv$', r'\.pdf$', r'\.mp4$']
+
+# Intentar leer el contenido del archivo HTML con diferentes enfoques
+html_content = ''
+try:
+    with open(html_file_path, 'r', encoding='utf-8') as file:
+        html_content = file.read()
+except UnicodeDecodeError:
+    try:
+        with open(html_file_path, 'r', encoding='latin-1') as file:
+            html_content = file.read()
+    except UnicodeDecodeError:
+        with open(html_file_path, 'r', encoding='utf-8', errors='ignore') as file:
+            html_content = file.read()
+
+# Parsear el contenido HTML con BeautifulSoup
+soup = BeautifulSoup(html_content, 'html.parser')
+
+# Mostrar el contenido del HTML para verificación
+# print(soup.prettify())
+
+# Buscar archivos enlazados en el HTML
+linked_files = []
+for a_tag in soup.find_all('a', href=True):
+    href = a_tag['href']
+    for pattern in file_patterns:
+        if re.search(pattern, href):
+            linked_files.append(href)
+            break
+
+# Mostrar archivos enlazados encontrados para depuración
+# print("Archivos enlazados encontrados:")
+# for file in linked_files:
+#     print(file)
+
+# Función para buscar archivos en la carpeta fuente
+def find_files(root_folder, file_name):
+    for root, dirs, files in os.walk(root_folder):
+        for file in files:
+            if file == file_name:
+                return os.path.join(root, file)
+    return None
+
+# Crear carpeta de destino si no existe
+os.makedirs(destination_folder, exist_ok=True)
+
+# Copiar archivos encontrados a la carpeta de destino
+for file in linked_files:
+    file_name = os.path.basename(file)
+    file_path = find_files(source_folder, file_name)
+    if file_path:
+        shutil.copy(file_path, destination_folder)
+        # print(f'Archivo {file_name} copiado a {destination_folder}')
+    else:
+        print(f'Archivo {file_name} no encontrado en {source_folder}')
+
+print('Proceso completado.')

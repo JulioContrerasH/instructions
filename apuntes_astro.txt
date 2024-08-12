@@ -1,0 +1,2 @@
+grep -R "sting cloud d" Para buscar las palabras y saber en qué archivos está
+wget -m -p -E -k -K -np https://cloudsen12.github.io/map/ para descargar contenido

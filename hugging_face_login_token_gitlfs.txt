@@ -1,0 +1,46 @@
+
+cd /home/contrerasnetk/Documents/Repositories/files_isp_hf_2
+
+git clone https://huggingface.co/datasets/isp-uv-es/Web_site_legacy
+cd Web_site_legacy
+
+sudo apt-get install git-lfs  # Para Ubuntu/Debian
+git lfs install
+
+
+
+git remote set-url origin https://JulioContrerasH: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@huggingface.co/datasets/isp-uv-es/Web_site_legacy
+
+# Rastrear archivos grandes con Git LFS
+git lfs track "*.zip"
+git lfs track "*.tar"
+git lfs track "*.tar.gz"
+git lfs track "*.rar"
+git lfs track "*.mkv"
+git lfs track "*.pdf"
+git lfs track "*.mp4"
+git lfs track "*.m"
+
+
+# Confirmar los cambios en Git LFS
+git add .gitattributes
+git add .
+git commit -m "Track large files with Git LFS"
+
+huggingface-cli lfs-enable-largefiles .
+
+# Agregar y confirmar los cambios
+git add .
+git commit -m "Enable large files support and track files with Git LFS"
+
+# Agregar grandes archivos
+
+git add .
+git commit -m "Files"
+
+
+# pip install huggingface-hub
+huggingface-cli lfs-enable-largefiles .
+
+git push origin main --force
+
