@@ -1,0 +1,813 @@
+{
+    "type": "Collection",
+    "stac_version": "1.0.0",
+    "stac_extensions": [
+        "https://stac-extensions.github.io/contacts/v0.1.1/schema.json"
+    ],
+    "id": "CloudSEN12Plus",
+    "description": "<img src='cloudsen12.gif' alt='drawing' width='20%'/>\nCloudSEN12+ is a significant extension of the CloudSEN12 dataset, which doubles the number of expert-reviewed labels, making it, by a large margin, the largest cloud detection dataset to date for Sentinel-2. All labels from the previous version have been curated and refined, enhancing the dataset's trustworthiness. This new release is licensed under CC0, which puts it in the public domain and allows anyone to use, modify, and distribute it without permission or attribution.\n\n##Data Folder order:\n\n The CloudSEN12+ dataset is organized into `train`, `val`, and `test` splits. The images have been padded from 509x509 to 512x512 and 2000x2000 to 2048x2048 to ensure that the patches are divisible by 32. The padding is filled with zeros in the left and bottom sides of the image. For those who prefer traditional storage formats, GeoTIFF files are available in our [ScienceDataBank](https://www.scidb.cn/en/detail?dataSetId=2036f4657b094edfbb099053d6024b08&version=V1) repository.\n\n<center>\n<img src='https://cdn-uploads.huggingface.co/production/uploads/6402474cfa1acad600659e92/9UA4U3WObVeq7BAcf37-C.png' alt='drawing' width='50%'/>\n</center>\n*CloudSEN12+ spatial coverage. The terms p509 and p2000 denote the patch size 509 \u00d7 509 and 2000 \u00d7 2000, respectively. `high`, `scribble`, and `nolabel` refer to the types of expert-labeled annotations*",
+    "license": "cc0-1.0",
+    "extent": {
+        "spatial": {
+            "bbox": [
+                [
+                    -180.0,
+                    -56.0,
+                    180.0,
+                    84.0
+                ]
+            ]
+        },
+        "temporal": {
+            "interval": [
+                [
+                    "2015-06-23T00:00:00Z",
+                    "2023-06-23T00:00:00Z"
+                ]
+            ]
+        }
+    },
+    "links": [
+        {
+            "href": "collection.json",
+            "rel": "self",
+            "type": "application/json",
+            "title": "An ML-STAC Collection JSON file"
+        }
+    ],
+    "item_assets": {
+        "collection": {
+            "title": "An ML-STAC Item JSON file",
+            "description": null,
+            "type": "application/json",
+            "roles": [
+                "mlstac-collection"
+            ]
+        },
+        "data": {
+            "title": "A collection of .mls files",
+            "description": null,
+            "type": "application/mls; profile=cloud-optimized",
+            "roles": [
+                "data"
+            ]
+        },
+        "metadata": {
+            "title": "A collection of .parquet files",
+            "description": null,
+            "type": "application/parquet",
+            "roles": [
+                "metadata"
+            ]
+        }
+    },
+    "title": "A global dataset for semantic understanding of cloud and cloud shadow in Sentinel-2",
+    "keywords": [
+        "clouds",
+        "sentinel-2",
+        "image-segmentation",
+        "deep-learning",
+        "remote-sensing"
+    ],
+    "providers": {
+        "field": [
+            {
+                "name": "Image & Signal Processing",
+                "description": null,
+                "roles": [
+                    "host"
+                ],
+                "url": "https://isp.uv.es/"
+            },
+            {
+                "name": "ESA",
+                "description": null,
+                "roles": [
+                    "producer"
+                ],
+                "url": "https://www.esa.int/"
+            }
+        ]
+    },
+    "summaries": null,
+    "assets": null,
+    "mlstac_version": "0.1.0",
+    "ml_task": [
+        "image-segmentation"
+    ],
+    "ml_catalog": {
+        "train": {
+            "name": "train",
+            "data_files": [
+                "https://huggingface.co/datasets/isp-uv-es/CloudSEN12Plus/resolve/main/train/train_2000_high.mlstac",
+                "https://huggingface.co/datasets/isp-uv-es/CloudSEN12Plus/resolve/main/train/train_509_high.mlstac",
+                "https://huggingface.co/datasets/isp-uv-es/CloudSEN12Plus/resolve/main/train/train_509_scribble.mlstac",
+                "https://huggingface.co/datasets/isp-uv-es/CloudSEN12Plus/resolve/main/train/train_509_nolabel_chunk1.mlstac",
+                "https://huggingface.co/datasets/isp-uv-es/CloudSEN12Plus/resolve/main/train/train_509_nolabel_chunk2.mlstac"
+            ],
+            "data_descriptions": [
+                "The training set contains 687 patches of 2048x2048 pixels with high-quality labels.",
+                "The training set contains 8490 patches of 512x512 pixels with high-quality labels.",
+                "The training set contains 8785 patches of 512x512 pixels with scribble labels.",
+                "The training set contains 14700 patches of 512x512 pixels with no labels (chunk 1).",
+                "The training set contains 14700 patches of 512x512 pixels with no labels (chunk 2)."
+            ],
+            "data_checksum": [
+                26678912768,
+                23622014997,
+                24524794351,
+                40631056720,
+                40762271489
+            ],
+            "metadata_file": "https://huggingface.co/datasets/isp-uv-es/CloudSEN12Plus/resolve/main/train/metadata.parquet",
+            "metadata_description": "The metadata of the training set.",
+            "metadata_checksum": 4380750
+        },
+        "validation": {
+            "name": "validation",
+            "data_files": [
+                "https://huggingface.co/datasets/isp-uv-es/CloudSEN12Plus/resolve/main/validation/validation_2000_high.mlstac",
+                "https://huggingface.co/datasets/isp-uv-es/CloudSEN12Plus/resolve/main/validation/validation_509_high.mlstac",
+                "https://huggingface.co/datasets/isp-uv-es/CloudSEN12Plus/resolve/main/validation/validation_509_scribble.mlstac"
+            ],
+            "data_descriptions": [
+                "The validation set contains 77 patches of 2048x2048 pixels with high-quality labels.",
+                "The validation set contains 687 patches of 512x512 pixels with high-quality labels.",
+                "The validation set contains 85 patches of 512x512 pixels with scribble labels."
+            ],
+            "data_checksum": [
+                2980087877,
+                1461831762,
+                1562200992
+            ],
+            "metadata_file": "https://huggingface.co/datasets/isp-uv-es/CloudSEN12Plus/resolve/main/validation/metadata.parquet",
+            "metadata_description": "The metadata of the validation set.",
+            "metadata_checksum": 113175
+        },
+        "test": {
+            "name": "test",
+            "data_files": [
+                "https://huggingface.co/datasets/isp-uv-es/CloudSEN12Plus/resolve/main/test/test_2000_high.mlstac",
+                "https://huggingface.co/datasets/isp-uv-es/CloudSEN12Plus/resolve/main/test/test_509_high.mlstac",
+                "https://huggingface.co/datasets/isp-uv-es/CloudSEN12Plus/resolve/main/test/test_509_scribble.mlstac"
+            ],
+            "data_descriptions": [
+                "The test set contains 85 patches of 2048x2048 pixels with high-quality labels.",
+                "The test set contains 975 patches of 512x512 pixels with high-quality labels.",
+                "The test set contains 655 patches of 512x512 pixels with scribble labels."
+            ],
+            "data_checksum": [
+                3412307430,
+                2679467254,
+                1833867379
+            ],
+            "metadata_file": "https://huggingface.co/datasets/isp-uv-es/CloudSEN12Plus/resolve/main/test/metadata.parquet",
+            "metadata_description": "The metadata of the test set.",
+            "metadata_checksum": 158443
+        }
+    },
+    "ml_target": {
+        "labels": {
+            "clear": 0,
+            "thick-cloud": 1,
+            "thin-cloud": 2,
+            "cloud-shadow": 3
+        },
+        "layers": 1
+    },
+    "ml_authors": {
+        "authors": [
+            {
+                "name": "David Montero",
+                "organization": "RSC4Earth",
+                "identifier": null,
+                "position": "PhD",
+                "logo": null,
+                "phones": null,
+                "emails": null,
+                "addresses": null,
+                "links": [
+                    {
+                        "href": "https://twitter.com/dmlmont",
+                        "rel": "group",
+                        "type": null,
+                        "title": null
+                    }
+                ],
+                "contactInstructions": null,
+                "roles": null
+            },
+            {
+                "name": "Cesar Aybar",
+                "organization": "Image & Signal Processing",
+                "identifier": null,
+                "position": "PhD",
+                "logo": null,
+                "phones": null,
+                "emails": null,
+                "addresses": null,
+                "links": [
+                    {
+                        "href": "http://csaybar.github.io/",
+                        "rel": "about",
+                        "type": null,
+                        "title": null
+                    }
+                ],
+                "contactInstructions": null,
+                "roles": null
+            },
+            {
+                "name": "Gonzalo Mateo-Garc\u00eda",
+                "organization": "Image & Signal Processing",
+                "identifier": null,
+                "position": "PhD",
+                "logo": null,
+                "phones": null,
+                "emails": null,
+                "addresses": null,
+                "links": [
+                    {
+                        "href": "https://www.uv.es/gonmagar/",
+                        "rel": "about",
+                        "type": null,
+                        "title": null
+                    }
+                ],
+                "contactInstructions": null,
+                "roles": null
+            },
+            {
+                "name": "Luis G\u00f3mez-Chova",
+                "organization": "Image & Signal Processing",
+                "identifier": null,
+                "position": "PhD",
+                "logo": null,
+                "phones": null,
+                "emails": null,
+                "addresses": null,
+                "links": [
+                    {
+                        "href": "https://www.uv.es/chovago/",
+                        "rel": "about",
+                        "type": null,
+                        "title": null
+                    }
+                ],
+                "contactInstructions": null,
+                "roles": null
+            },
+            {
+                "name": "Luis Ysuhuaylas",
+                "organization": "UNMSM",
+                "identifier": null,
+                "position": "Bachelor student",
+                "logo": null,
+                "phones": null,
+                "emails": null,
+                "addresses": null,
+                "links": [
+                    {
+                        "href": "https://vrip.unmsm.edu.pe/ecohidro/",
+                        "rel": "group",
+                        "type": null,
+                        "title": null
+                    }
+                ],
+                "contactInstructions": null,
+                "roles": null
+            },
+            {
+                "name": "Jhomira Loja",
+                "organization": "UNMSM",
+                "identifier": null,
+                "position": "Bachelor student",
+                "logo": null,
+                "phones": null,
+                "emails": null,
+                "addresses": null,
+                "links": [
+                    {
+                        "href": "https://vrip.unmsm.edu.pe/ecohidro/",
+                        "rel": "group",
+                        "type": null,
+                        "title": null
+                    }
+                ],
+                "contactInstructions": null,
+                "roles": null
+            },
+            {
+                "name": "Karen Gonzales",
+                "organization": "UNMSM",
+                "identifier": null,
+                "position": "Bachelor student",
+                "logo": null,
+                "phones": null,
+                "emails": null,
+                "addresses": null,
+                "links": [
+                    {
+                        "href": "https://vrip.unmsm.edu.pe/ecohidro/",
+                        "rel": "group",
+                        "type": null,
+                        "title": null
+                    }
+                ],
+                "contactInstructions": null,
+                "roles": null
+            },
+            {
+                "name": "Fernando Herrera",
+                "organization": "UNMSM",
+                "identifier": null,
+                "position": "Bachelor student",
+                "logo": null,
+                "phones": null,
+                "emails": null,
+                "addresses": null,
+                "links": [
+                    {
+                        "href": "https://vrip.unmsm.edu.pe/ecohidro/",
+                        "rel": "group",
+                        "type": null,
+                        "title": null
+                    }
+                ],
+                "contactInstructions": null,
+                "roles": null
+            },
+            {
+                "name": "Lesly Bautista",
+                "organization": "UNMSM",
+                "identifier": null,
+                "position": "Bachelor student",
+                "logo": null,
+                "phones": null,
+                "emails": null,
+                "addresses": null,
+                "links": [
+                    {
+                        "href": "https://vrip.unmsm.edu.pe/ecohidro/",
+                        "rel": "group",
+                        "type": null,
+                        "title": null
+                    }
+                ],
+                "contactInstructions": null,
+                "roles": null
+            },
+            {
+                "name": "Roy Yali",
+                "organization": "UNMSM",
+                "identifier": null,
+                "position": "Bachelor student",
+                "logo": null,
+                "phones": null,
+                "emails": null,
+                "addresses": null,
+                "links": [
+                    {
+                        "href": "https://vrip.unmsm.edu.pe/ecohidro/",
+                        "rel": "group",
+                        "type": null,
+                        "title": null
+                    }
+                ],
+                "contactInstructions": null,
+                "roles": null
+            },
+            {
+                "name": "Wendy Espinoza",
+                "organization": "UNMSM",
+                "identifier": null,
+                "position": "Bachelor student",
+                "logo": null,
+                "phones": null,
+                "emails": null,
+                "addresses": null,
+                "links": [
+                    {
+                        "href": "https://vrip.unmsm.edu.pe/ecohidro/",
+                        "rel": "group",
+                        "type": null,
+                        "title": null
+                    }
+                ],
+                "contactInstructions": null,
+                "roles": null
+            },
+            {
+                "name": "Fernando Prudencio",
+                "organization": "UNMSM",
+                "identifier": null,
+                "position": "Bachelor student",
+                "logo": null,
+                "phones": null,
+                "emails": null,
+                "addresses": null,
+                "links": [
+                    {
+                        "href": "https://vrip.unmsm.edu.pe/ecohidro/",
+                        "rel": "group",
+                        "type": null,
+                        "title": null
+                    }
+                ],
+                "contactInstructions": null,
+                "roles": null
+            },
+            {
+                "name": "Lucy A. Flores",
+                "organization": "UNMSM",
+                "identifier": null,
+                "position": "Bachelor student",
+                "logo": null,
+                "phones": null,
+                "emails": null,
+                "addresses": null,
+                "links": [
+                    {
+                        "href": "https://vrip.unmsm.edu.pe/ecohidro/",
+                        "rel": "group",
+                        "type": null,
+                        "title": null
+                    }
+                ],
+                "contactInstructions": null,
+                "roles": null
+            },
+            {
+                "name": "Evelin Mamani",
+                "organization": "UNMSM",
+                "identifier": null,
+                "position": "Bachelor student",
+                "logo": null,
+                "phones": null,
+                "emails": null,
+                "addresses": null,
+                "links": [
+                    {
+                        "href": "https://vrip.unmsm.edu.pe/ecohidro/",
+                        "rel": "group",
+                        "type": null,
+                        "title": null
+                    }
+                ],
+                "contactInstructions": null,
+                "roles": null
+            },
+            {
+                "name": "Antonio Limas",
+                "organization": "UNMSM",
+                "identifier": null,
+                "position": "Bachelor student",
+                "logo": null,
+                "phones": null,
+                "emails": null,
+                "addresses": null,
+                "links": [
+                    {
+                        "href": "https://vrip.unmsm.edu.pe/ecohidro/",
+                        "rel": "group",
+                        "type": null,
+                        "title": null
+                    }
+                ],
+                "contactInstructions": null,
+                "roles": null
+            },
+            {
+                "name": "Alejandro Alcantara",
+                "organization": "UNMSM",
+                "identifier": null,
+                "position": "Bachelor student",
+                "logo": null,
+                "phones": null,
+                "emails": null,
+                "addresses": null,
+                "links": [
+                    {
+                        "href": "https://vrip.unmsm.edu.pe/ecohidro/",
+                        "rel": "group",
+                        "type": null,
+                        "title": null
+                    }
+                ],
+                "contactInstructions": null,
+                "roles": null
+            },
+            {
+                "name": "Daryl Ayala",
+                "organization": "U. Agraria La Molina",
+                "identifier": null,
+                "position": "Bachelor student",
+                "logo": null,
+                "phones": null,
+                "emails": null,
+                "addresses": null,
+                "links": [
+                    {
+                        "href": "https://www.lamolina.edu.pe/",
+                        "rel": "group",
+                        "type": null,
+                        "title": null
+                    }
+                ],
+                "contactInstructions": null,
+                "roles": null
+            },
+            {
+                "name": "Jeanett Valladares",
+                "organization": "U. Villareal",
+                "identifier": null,
+                "position": "Bachelor student",
+                "logo": null,
+                "phones": null,
+                "emails": null,
+                "addresses": null,
+                "links": [
+                    {
+                        "href": "https://www.unfv.edu.pe/",
+                        "rel": "group",
+                        "type": null,
+                        "title": null
+                    }
+                ],
+                "contactInstructions": null,
+                "roles": null
+            },
+            {
+                "name": "Maria Qui\u00f1onez",
+                "organization": "U. Santiago Antunez de Mayolo",
+                "identifier": null,
+                "position": "Bachelor student",
+                "logo": null,
+                "phones": null,
+                "emails": null,
+                "addresses": null,
+                "links": [
+                    {
+                        "href": "https://www.usam.edu.pe/",
+                        "rel": "group",
+                        "type": null,
+                        "title": null
+                    }
+                ],
+                "contactInstructions": null,
+                "roles": null
+            },
+            {
+                "name": "Rai Fajardo",
+                "organization": "U. Agraia de la Selva",
+                "identifier": null,
+                "position": "Bachelor student",
+                "logo": null,
+                "phones": null,
+                "emails": null,
+                "addresses": null,
+                "links": [
+                    {
+                        "href": "https://www.unas.edu.pe/",
+                        "rel": "group",
+                        "type": null,
+                        "title": null
+                    }
+                ],
+                "contactInstructions": null,
+                "roles": null
+            },
+            {
+                "name": "Raul Loayza-Muro",
+                "organization": "U. Cayetano Heredia",
+                "identifier": null,
+                "position": "PhD",
+                "logo": null,
+                "phones": null,
+                "emails": null,
+                "addresses": null,
+                "links": [
+                    {
+                        "href": "https://www.upch.edu.pe/",
+                        "rel": "group",
+                        "type": null,
+                        "title": null
+                    }
+                ],
+                "contactInstructions": null,
+                "roles": null
+            },
+            {
+                "name": "Martin Leyva",
+                "organization": "U. Cayetano Heredia",
+                "identifier": null,
+                "position": "PhD",
+                "logo": null,
+                "phones": null,
+                "emails": null,
+                "addresses": null,
+                "links": [
+                    {
+                        "href": "https://www.upch.edu.pe/",
+                        "rel": "group",
+                        "type": null,
+                        "title": null
+                    }
+                ],
+                "contactInstructions": null,
+                "roles": null
+            },
+            {
+                "name": "Bram Willems",
+                "organization": "U. Cayetano Heredia",
+                "identifier": null,
+                "position": "PhD",
+                "logo": null,
+                "phones": null,
+                "emails": null,
+                "addresses": null,
+                "links": [
+                    {
+                        "href": "https://www.upch.edu.pe/",
+                        "rel": "group",
+                        "type": null,
+                        "title": null
+                    }
+                ],
+                "contactInstructions": null,
+                "roles": null
+            }
+        ]
+    },
+    "ml_curators": {
+        "curators": [
+            {
+                "name": "Cesar Aybar",
+                "organization": "Image & Signal Processing",
+                "identifier": null,
+                "position": "PhD",
+                "logo": null,
+                "phones": null,
+                "emails": null,
+                "addresses": null,
+                "links": [
+                    {
+                        "href": "http://csaybar.github.io/",
+                        "rel": "about",
+                        "type": null,
+                        "title": null
+                    }
+                ],
+                "contactInstructions": null,
+                "roles": null
+            }
+        ]
+    },
+    "ml_reviewers": null,
+    "ml_dimensions": {
+        "dimensions": [
+            {
+                "axis": 0,
+                "name": "C",
+                "description": "Spectral bands"
+            },
+            {
+                "axis": 1,
+                "name": "H",
+                "description": "Height"
+            },
+            {
+                "axis": 2,
+                "name": "W",
+                "description": "Width"
+            }
+        ]
+    },
+    "ml_spectral": {
+        "bands": [
+            {
+                "name": "B01",
+                "index": 0,
+                "common_name": "coastal aerosol",
+                "description": "Band 1 - Coastal aerosol - 60m",
+                "unit": "nm",
+                "center_wavelength": 443.5,
+                "full_width_half_max": 17.0
+            },
+            {
+                "name": "B02",
+                "index": 1,
+                "common_name": "blue",
+                "description": "Band 2 - Blue - 10m",
+                "unit": "nm",
+                "center_wavelength": 496.5,
+                "full_width_half_max": 53.0
+            },
+            {
+                "name": "B03",
+                "index": 2,
+                "common_name": "green",
+                "description": "Band 3 - Green - 10m",
+                "unit": "nm",
+                "center_wavelength": 560.0,
+                "full_width_half_max": 34.0
+            },
+            {
+                "name": "B04",
+                "index": 3,
+                "common_name": "red",
+                "description": "Band 4 - Red - 10m",
+                "unit": "nm",
+                "center_wavelength": 664.5,
+                "full_width_half_max": 29.0
+            },
+            {
+                "name": "B05",
+                "index": 4,
+                "common_name": "red edge 1",
+                "description": "Band 5 - Vegetation red edge 1 - 20m",
+                "unit": "nm",
+                "center_wavelength": 704.5,
+                "full_width_half_max": 13.0
+            },
+            {
+                "name": "B06",
+                "index": 5,
+                "common_name": "red edge 2",
+                "description": "Band 6 - Vegetation red edge 2 - 20m",
+                "unit": "nm",
+                "center_wavelength": 740.5,
+                "full_width_half_max": 13.0
+            },
+            {
+                "name": "B07",
+                "index": 6,
+                "common_name": "red edge 3",
+                "description": "Band 7 - Vegetation red edge 3 - 20m",
+                "unit": "nm",
+                "center_wavelength": 783.0,
+                "full_width_half_max": 18.0
+            },
+            {
+                "name": "B08",
+                "index": 7,
+                "common_name": "NIR",
+                "description": "Band 8 - Near infrared - 10m",
+                "unit": "nm",
+                "center_wavelength": 840.0,
+                "full_width_half_max": 114.0
+            },
+            {
+                "name": "B8A",
+                "index": 8,
+                "common_name": "red edge 4",
+                "description": "Band 8A - Vegetation red edge 4 - 20m",
+                "unit": "nm",
+                "center_wavelength": 864.5,
+                "full_width_half_max": 19.0
+            },
+            {
+                "name": "B09",
+                "index": 9,
+                "common_name": "water vapor",
+                "description": "Band 9 - Water vapor - 60m",
+                "unit": "nm",
+                "center_wavelength": 945.0,
+                "full_width_half_max": 18.0
+            },
+            {
+                "name": "B10",
+                "index": 10,
+                "common_name": "cirrus",
+                "description": "Band 10 - Cirrus - 60m",
+                "unit": "nm",
+                "center_wavelength": 1375.5,
+                "full_width_half_max": 31.0
+            },
+            {
+                "name": "B11",
+                "index": 11,
+                "common_name": "SWIR 1",
+                "description": "Band 11 - Shortwave infrared 1 - 20m",
+                "unit": "nm",
+                "center_wavelength": 1613.5,
+                "full_width_half_max": 89.0
+            },
+            {
+                "name": "B12",
+                "index": 12,
+                "common_name": "SWIR 2",
+                "description": "Band 12 - Shortwave infrared 2 - 20m",
+                "unit": "nm",
+                "center_wavelength": 2199.5,
+                "full_width_half_max": 173.0
+            }
+        ],
+        "axis": null,
+        "sensor": "Sentinel2 - MSI"
+    },
+    "ml_split_strategy": "stratified",
+    "ml_raw_data_url": "https://cloudsen12.github.io/",
+    "ml_discussion_url": "https://huggingface.co/datasets/isp-uv-es/CloudSEN12Plus/discussions",
+    "ml_paper": "https://www.sciencedirect.com/science/article/pii/S2352340924008163"
+}

@@ -1,6 +1,6 @@
 import os
 import re
-
+r"D:\GitHub\IPL-UV.github.io_copia\static\old_pages\data\after_effects\plone.css"
 # Definir los patrones de búsqueda y reemplazo
 buscar_patron = r"https://huggingface.co/datasets/isp-uv-es/Web_site_legacy/blob/main/"
 reemplazar_patron = r"https://huggingface.co/datasets/isp-uv-es/Web_site_legacy/resolve/main/"
